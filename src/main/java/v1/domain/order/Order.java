@@ -3,11 +3,17 @@ package v1.domain.order;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
-@Builder
 public class Order {
     private Long orderId;
     private Long userId;
-    private Long productId;
-    private int quantity;
+    private List<OrderProduct> orderProducts;
+
+    @Builder
+    public Order(Long userId, List<OrderProduct> orderProducts) {
+        this.userId=userId;
+        this.orderProducts = orderProducts;
+    }
 }

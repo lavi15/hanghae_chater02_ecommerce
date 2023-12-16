@@ -25,4 +25,6 @@ public class OrderEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "orderEntity")
     private List<OrderProductEntity> orderProductEntities;
+
+    public
 }

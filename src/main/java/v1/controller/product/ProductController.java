@@ -22,7 +22,10 @@ public class ProductController {
     }
 
     @GetMapping("/popular")
-    public List<ProductResponse> getPopularProducts() {
-        return null;
+    public List<ProductResponse> getPopular(){
+        return productService.getProducts()
+                .stream()
+                .map(ProductResponse::new)
+                .toList();
     }
 }

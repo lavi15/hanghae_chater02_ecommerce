@@ -15,12 +15,14 @@ public class PointService {
 
     public void chargeBalance(Long userId, int chargePoint) {
         pointReader.checkPositive(chargePoint);
-        Point point = userReader.getUserPoint(userId).toPoint();
+        userReader.checkUser(userId);
+        Point point = pointRepository.findByUserId(userId);
         point.charge(chargePoint);
-        pointRepository.save(PointEntity.fromPoint(point));
+        pointRepository.save(point);
     }
 
     public Point getUserPoint(Long userId) {
-        return userReader.getUserPoint(userId).toPoint();
+        userReader.checkUser(userId);
+        return pointRepository.findByUserId(userId);
     }
 }

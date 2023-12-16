@@ -13,8 +13,10 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public List<Product> getProducts() {
-        return productRepository.findAll().stream()
-            .map(ProductEntity::toProduct)
-            .toList();
+        return productRepository.findAll();
+    }
+
+    public List<Product> getPopular() {
+        return productRepository.findPopular();
     }
 }
