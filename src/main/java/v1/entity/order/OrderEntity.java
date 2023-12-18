@@ -1,17 +1,12 @@
 package v1.entity.order;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.util.List;
-import lombok.Builder;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import v1.domain.point.Point;
+import v1.domain.order.Order;
 import v1.entity.BaseEntity;
+
+import java.util.List;
 
 @Entity
 @RequiredArgsConstructor
@@ -26,5 +21,11 @@ public class OrderEntity extends BaseEntity {
     @OneToMany(mappedBy = "orderEntity")
     private List<OrderProductEntity> orderProductEntities;
 
-    public
+    public Order toOrder() {
+        return Order.builder()
+                .orderId(getId())
+                .userId(getUserId())
+                .orderProducts(getOrderProductEntities().stream().map(OrderProductEntity::toOrderProduct).toList())
+                .build();
+    }
 }
