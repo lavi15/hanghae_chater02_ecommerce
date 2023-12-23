@@ -24,7 +24,7 @@ public class BalanceEntity extends BaseEntity {
 
     private Long userId;
 
-    @Builder
+    @Builder(toBuilder = true)
     private BalanceEntity(Long id, int balance, Long userId) {
         this.id = id;
         this.balance = balance;
