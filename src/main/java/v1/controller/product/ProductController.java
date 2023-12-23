@@ -14,7 +14,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/request")
-    public List<ProductResponse> getProducts() {
+    public List<ProductResponse> findProducts() {
         return productService.getProducts()
             .stream()
             .map(ProductResponse::new)
@@ -22,10 +22,7 @@ public class ProductController {
     }
 
     @GetMapping("/popular")
-    public List<ProductResponse> getPopular(){
-        return productService.getProducts()
-                .stream()
-                .map(ProductResponse::new)
-                .toList();
+    public void findPopularProductsInThreeDays(){
+
     }
 }

@@ -1,4 +1,4 @@
-package v1.entity.User;
+package v1.entity.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

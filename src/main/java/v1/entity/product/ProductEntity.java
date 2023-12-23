@@ -8,10 +8,8 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import v1.domain.point.Point;
 import v1.domain.product.Product;
 import v1.entity.BaseEntity;
-import v1.entity.point.PointEntity;
 
 @Entity
 @RequiredArgsConstructor

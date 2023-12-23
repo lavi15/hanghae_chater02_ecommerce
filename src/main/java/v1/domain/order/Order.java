@@ -4,9 +4,10 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
+import v1.entity.BaseEntity;
 
 @Getter
-public class Order {
+public class Order extends BaseEntity {
     private Long orderId;
     private Long userId;
     private List<OrderProduct> orderProducts;

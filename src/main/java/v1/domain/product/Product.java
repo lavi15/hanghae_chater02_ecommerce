@@ -1,7 +1,6 @@
 package v1.domain.product;
 
 
-import java.security.SecureRandom;
 import lombok.Builder;
 import lombok.Getter;
 

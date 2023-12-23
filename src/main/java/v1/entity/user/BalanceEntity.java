@@ -1,4 +1,4 @@
-package v1.entity.point;
+package v1.entity.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,43 +8,43 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import v1.domain.point.Point;
+import v1.domain.user.Balance;
 import v1.entity.BaseEntity;
 
 @Entity
 @RequiredArgsConstructor
 @Getter
-@Table(name = "point")
-public class PointEntity extends BaseEntity {
+@Table(name = "balance")
+public class BalanceEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int point;
+    private int balance;
 
     private Long userId;
 
     @Builder
-    private PointEntity(Long id, int point, Long userId) {
+    private BalanceEntity(Long id, int balance, Long userId) {
         this.id = id;
-        this.point = point;
+        this.balance = balance;
         this.userId = userId;
     }
 
 
-    public static PointEntity fromPoint(Point  point){
-        return PointEntity.builder()
-                .id(point.getPointId())
-                .point(point.getPoint())
-                .userId(point.getUserId())
+    public static BalanceEntity fromBalance(Balance balance){
+        return BalanceEntity.builder()
+                .id(balance.getBalanceId())
+                .balance(balance.getBalance())
+                .userId(balance.getUserId())
                 .build();
     }
 
-    public Point toPoint(){
-        return Point.builder()
-                .pointId(getId())
+    public Balance toBalance(){
+        return Balance.builder()
+                .balanceId(getId())
+                .balance(getBalance())
                 .userId(getUserId())
-                .point(getPoint())
                 .build();
     }
 }

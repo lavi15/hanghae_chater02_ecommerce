@@ -1,13 +1,15 @@
 package v1.entity.product;
 
+import jakarta.transaction.Transactional;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import v1.domain.product.Product;
-
-import java.util.List;
+import v1.entity.order.OrderProductRepository;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional
 public class ProductRepositoryImpl implements ProductRepository{
     private final ProductEntityRepository productEntityRepository;
 
@@ -16,8 +18,4 @@ public class ProductRepositoryImpl implements ProductRepository{
         return productEntityRepository.findAll().stream().map(ProductEntity::toProduct).toList();
     }
 
-    @Override
-    public List<Product> findPopular(){
-        return productEntityRepository.findAll().stream().map(ProductEntity::toProduct).toList();
-    }
 }
