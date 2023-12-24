@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import v1.controller.ApiResponse;
+import v1.controller.user.BalanceResponse;
 import v1.domain.product.ProductService;
 
 @RestController
@@ -14,15 +16,18 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/request")
-    public List<ProductResponse> findProducts() {
-        return productService.getProducts()
+    public ApiResponse<List<ProductResponse>> getProducts() {
+        return ApiResponse.ok(productService.getProducts()
             .stream()
             .map(ProductResponse::new)
-            .toList();
+            .toList());
     }
 
     @GetMapping("/popular")
-    public void findPopularProductsInThreeDays(){
-
+    public ApiResponse<List<ProductResponse>> getPopularProductsInThreeDays(){
+        return ApiResponse.ok(productService.getPopularProductsInThreeDays()
+                .stream()
+                .map(ProductResponse::new)
+                .toList());
     }
 }

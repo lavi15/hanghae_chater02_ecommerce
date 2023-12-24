@@ -11,8 +11,7 @@ public class BalanceService {
     private final UserBalanceReader userBalanceReader;
 
     public void chargeBalance(Long userId, int chargeBalance) {
-        userBalanceReader.validateChargeBalance(chargeBalance);
-        Balance balance = userBalanceReader.read(userId);
+        Balance balance = userBalanceReader.read(userId, chargeBalance);
         balance.charge(chargeBalance);
         balanceRepository.save(balance);
     }

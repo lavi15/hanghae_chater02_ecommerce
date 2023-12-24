@@ -18,4 +18,10 @@ public class ProductRepositoryImpl implements ProductRepository{
         return productEntityRepository.findAll().stream().map(ProductEntity::toProduct).toList();
     }
 
+    @Override
+    public Product findById(Long productId) {
+        return productEntityRepository.findById(productId).get().toProduct();
+    }
+
+
 }

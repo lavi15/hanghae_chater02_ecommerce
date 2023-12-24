@@ -17,7 +17,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<OrderProduct> findPopularProductsInThreeDays() {
-        return orderProductRepository.findPopularProducts();
+    public List<Product> getPopularProductsInThreeDays() {
+        return orderProductRepository.findPopularProducts().stream()
+                .map(orderProduct -> productRepository.findById(orderProduct.getProductId())).toList();
     }
 }

@@ -1,12 +1,10 @@
-package v1.domain.product;
+package v1.entity.product;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import v1.entity.product.ProductEntity;
-import v1.entity.product.ProductEntityRepository;
+import v1.domain.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +12,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class ProductServiceTest {
+class ProductRepositoryImplTest {
     @Autowired
-    private ProductService productService;
-
+    private ProductRepository productRepository;
     @Autowired
     private ProductEntityRepository productEntityRepository;
 
     @Test
-    @DisplayName("모든 상품을 조회하여 반환한다.")
-    @Transactional
-    void getProductsTest() {
+    @DisplayName("모든 상품의 정보를 product class로 매핑해서 반환한다.")
+    void findAllTest() {
         //given
         List<ProductEntity> productEntities = new ArrayList<>();
         productEntities.add(ProductEntity.builder()
@@ -56,7 +52,7 @@ class ProductServiceTest {
         productEntityRepository.saveAll(productEntities);
 
         //when
-        List<Product> products = productService.getProducts();
+        List<Product> products = productRepository.findAll();
 
         //then
         assertThat(products.size()).isEqualTo(5);
