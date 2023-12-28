@@ -1,9 +1,10 @@
 package v1.entity.order;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
+import v1.domain.order.Order;
+import v1.domain.product.Product;
 
-@Repository
-public interface OrderRepository extends JpaRepository<OrderEntity, Long>{
-
+public interface OrderRepository {
+    void save(Order order);
 }

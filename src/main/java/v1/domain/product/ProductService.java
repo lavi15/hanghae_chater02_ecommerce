@@ -12,13 +12,14 @@ import v1.entity.product.ProductRepository;
 public class ProductService {
     private final ProductRepository productRepository;
     private final OrderProductRepository orderProductRepository;
+    private final ProductReader productReader;
 
     public List<Product> getProducts() {
         return productRepository.findAll();
     }
 
     public List<Product> getPopularProductsInThreeDays() {
-        return orderProductRepository.findPopularProducts().stream()
-                .map(orderProduct -> productRepository.findById(orderProduct.getProductId())).toList();
+        return orderProductRepository.getPopularProductsInThreeDays().stream()
+                .map(orderProduct -> productReader.read(orderProduct.getProductId())).toList();
     }
 }

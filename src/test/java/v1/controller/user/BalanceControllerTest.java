@@ -7,31 +7,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import v1.domain.user.BalanceService;
+import v1.controller.ControllerTestSupport;
 
-@WebMvcTest(controllers = BalanceController.class)
-public class BalanceControllerTest{
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private BalanceService balanceService;
+public class BalanceControllerTest extends ControllerTestSupport {
 
     @Test
     @DisplayName("잔액을 충전한다.")
-    void chargeBalance() throws Exception {
+    void chargeBalanceTest() throws Exception {
         //given
         Long userId = 1L;
         ChargeBalanceRequest chargeBalanceRequest = ChargeBalanceRequest.builder().chargePoint(1000).build();

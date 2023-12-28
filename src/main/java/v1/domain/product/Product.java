@@ -11,4 +11,18 @@ public class Product {
     private String  name;
     private int price;
     private int quantity;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+            "productId=" + productId +
+            ", name='" + name + '\'' +
+            ", price=" + price +
+            ", quantity=" + quantity +
+            '}';
+    }
+
+    public void deduct(int deductQuantity) {
+        this.quantity-=deductQuantity;
+    }
 }

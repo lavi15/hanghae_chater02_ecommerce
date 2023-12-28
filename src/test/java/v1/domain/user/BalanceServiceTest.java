@@ -1,7 +1,9 @@
 package v1.domain.user;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import v1.entity.user.BalanceEntity;
 import v1.entity.user.BalanceEntityRepository;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("dev")
@@ -24,23 +24,23 @@ class BalanceServiceTest {
     @Autowired
     private UserBalanceReader userBalanceReader;
 
-    @Transactional
-    @BeforeEach
-    void createUserBalance() {
-        BalanceEntity balance = BalanceEntity.builder()
-                .balance(0)
-                .userId(1L)
-                .build();
-        balanceEntityRepository.save(balance);
+    @AfterEach
+    void tearDown() {
+        balanceEntityRepository.deleteAllInBatch();
     }
 
     @Test
     @DisplayName("0 초과의 유저포인트를 충전한다.")
-    @Transactional
     void chargeBalanceTest() {
         //given
         Long userId = 1L;
         int chargeBalance = 1000;
+
+        BalanceEntity balanceEntity = BalanceEntity.builder()
+            .balance(0)
+            .userId(1L)
+            .build();
+        balanceEntityRepository.save(balanceEntity);
 
         //when
         balanceService.chargeBalance(userId, chargeBalance);
@@ -52,10 +52,15 @@ class BalanceServiceTest {
 
     @Test
     @DisplayName("특정 유저의 잔액을 조회한다.")
-    @Transactional
     void getUserPointTest() {
         //given
         Long userId = 1L;
+
+        BalanceEntity balanceEntity = BalanceEntity.builder()
+            .balance(0)
+            .userId(1L)
+            .build();
+        balanceEntityRepository.save(balanceEntity);
 
         //when
         Balance balance = balanceService.getUserPoint(userId);

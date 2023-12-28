@@ -7,7 +7,7 @@ import java.util.List;
 import v1.entity.BaseEntity;
 
 @Getter
-public class Order extends BaseEntity {
+public class Order{
     private Long orderId;
     private Long userId;
     private List<OrderProduct> orderProducts;

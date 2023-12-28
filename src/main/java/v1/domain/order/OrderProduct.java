@@ -5,8 +5,13 @@ import lombok.Getter;
 import v1.entity.BaseEntity;
 
 @Getter
-@Builder
-public class OrderProduct extends BaseEntity {
+public class OrderProduct{
     private Long productId;
     private int quantity;
+
+    @Builder
+    public OrderProduct(Long productId, int quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
 }

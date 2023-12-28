@@ -14,4 +14,8 @@ public class Balance {
     public void charge(int balance) {
         this.balance += balance;
     }
+
+    public void payment(int balance) {
+        this.balance -= balance;
+    }
 }
