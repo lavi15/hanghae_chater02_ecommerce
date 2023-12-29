@@ -1,9 +1,12 @@
-package v1.entity.order;
+package v1.entity.order.repository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import v1.domain.order.Order;
+import v1.entity.order.OrderEntity;
+import v1.entity.orderproduct.repository.OrderProductEntityRepository;
+import v1.entity.orderproduct.repository.OrderProductRepository;
 
 @Repository
 @Transactional

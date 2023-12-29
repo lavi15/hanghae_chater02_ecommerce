@@ -53,6 +53,15 @@ dependencies {
     // RestDocs
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    // redisson
+    implementation 'org.redisson:redisson-spring-boot-starter:3.17.4'
+
+    //kafka
+    implementation 'org.springframework.kafka:spring-kafka:3.0.12'
+
+    //guava
+    implementation 'com.google.guava:guava:32.1.2-jre'
 }
 
 tasks.named('test') {

@@ -2,14 +2,14 @@ package v1.entity.order;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import v1.domain.order.Order;
-import v1.domain.product.Product;
 import v1.entity.BaseEntity;
 
 import java.util.List;
-import v1.entity.product.ProductEntity;
+import v1.entity.orderproduct.OrderProductEntity;
 
 @Entity
 @RequiredArgsConstructor
@@ -20,6 +20,9 @@ public class OrderEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
+
+    @Enumerated(EnumType.STRING)
+    private OrderState orderState;
 
     @OneToMany(mappedBy = "orderEntity")
     private List<OrderProductEntity> orderProductEntities;
@@ -33,9 +36,10 @@ public class OrderEntity extends BaseEntity {
     }
 
     @Builder
-    public OrderEntity(Long userId, List<OrderProductEntity> orderProductEntities) {
+    public OrderEntity(Long userId, List<OrderProductEntity> orderProductEntities, OrderState orderState) {
         this.userId = userId;
         this.orderProductEntities = orderProductEntities;
+        this.orderState = orderState != null ? orderState : OrderState.INIT;;
     }
 
     public static OrderEntity fromOrder(Order order, List<OrderProductEntity> orderProductEntities){

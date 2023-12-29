@@ -2,7 +2,7 @@ package v1.controller.order;
 
 import lombok.Builder;
 import lombok.Getter;
-import v1.domain.order.OrderProduct;
+import v1.domain.orderproduct.OrderProduct;
 
 @Getter
 @Builder

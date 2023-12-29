@@ -1,4 +1,4 @@
-package v1.entity.order;
+package v1.entity.order.repository;
 
 import java.util.List;
 import java.util.Optional;

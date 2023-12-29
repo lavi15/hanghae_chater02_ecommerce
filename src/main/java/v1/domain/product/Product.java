@@ -25,4 +25,8 @@ public class Product {
     public void deduct(int deductQuantity) {
         this.quantity-=deductQuantity;
     }
+
+    public void add(int addQuantity) {
+        this.quantity+=addQuantity;
+    }
 }

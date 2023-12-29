@@ -5,12 +5,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import v1.domain.user.Balance;
+import v1.entity.user.repository.BalanceEntityRepository;
+import v1.entity.user.repository.BalanceRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest
+@ActiveProfiles("dev")
 class BalanceRepositoryImplTest {
     @Autowired
     private BalanceRepository balanceRepository;
@@ -21,7 +25,6 @@ class BalanceRepositoryImplTest {
     void tearDown() {
         balanceEntityRepository.deleteAllInBatch();
     }
-
 
     @Test
     @DisplayName("user의 id로 balance를 찾아 balance class로 매핑하여 반환한다.")

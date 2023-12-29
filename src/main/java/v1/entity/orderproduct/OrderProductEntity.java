@@ -1,4 +1,4 @@
-package v1.entity.order;
+package v1.entity.orderproduct;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,12 +11,10 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import v1.domain.order.Order;
-import v1.domain.order.OrderProduct;
-import v1.entity.BaseEntity;
+import v1.domain.orderproduct.OrderProduct;
+import v1.entity.order.OrderEntity;
 
 @Getter
 @Entity(name = "order_product")

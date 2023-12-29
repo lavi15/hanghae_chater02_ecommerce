@@ -1,18 +1,23 @@
 package v1.entity.product;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import v1.domain.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import v1.domain.product.ProductReader;
+import v1.entity.product.repository.ProductEntityRepository;
+import v1.entity.product.repository.ProductRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 class ProductRepositoryImplTest {
     @Autowired
     private ProductRepository productRepository;
@@ -20,6 +25,11 @@ class ProductRepositoryImplTest {
     private ProductEntityRepository productEntityRepository;
     @Autowired
     private ProductReader productReader;
+
+    @AfterEach
+    void tearDown() {
+        productEntityRepository.deleteAllInBatch();
+    }
 
     @Test
     @DisplayName("모든 상품의 정보를 product class로 매핑해서 반환한다.")
@@ -65,22 +75,16 @@ class ProductRepositoryImplTest {
     @DisplayName("productId로 상품을 조회하여 product class로 매핑해서 반환한다.")
     void findByIdTest() {
         //given
-        List<ProductEntity> productEntities = new ArrayList<>();
-        productEntities.add(ProductEntity.builder()
+        ProductEntity productEntity = ProductEntity.builder()
             .name("샴푸")
             .price(10000)
             .quantity(5)
-            .build());
-        productEntities.add(ProductEntity.builder()
-            .name("린스")
-            .price(20000)
-            .quantity(3)
-            .build());
+            .build();
 
-        productEntityRepository.saveAll(productEntities);
+        productEntityRepository.save(productEntity);
 
         //when
-        Product product = productReader.read(1L);
+        Product product = productReader.read(productEntity.getId());
 
         //then
         assertThat(product.getName()).isEqualTo("샴푸");

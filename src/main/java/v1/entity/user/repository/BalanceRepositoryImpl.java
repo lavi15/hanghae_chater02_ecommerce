@@ -1,10 +1,11 @@
-package v1.entity.user;
+package v1.entity.user.repository;
 
 import jakarta.transaction.Transactional;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import v1.domain.user.Balance;
+import v1.entity.user.BalanceEntity;
 
 @Repository
 @RequiredArgsConstructor

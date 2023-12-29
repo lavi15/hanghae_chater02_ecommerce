@@ -2,22 +2,22 @@ package v1.domain.product;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import v1.entity.order.OrderProductEntity;
-import v1.entity.order.OrderProductEntityRepository;
+import org.springframework.test.context.ActiveProfiles;
+import v1.entity.orderproduct.OrderProductEntity;
+import v1.entity.orderproduct.repository.OrderProductEntityRepository;
 import v1.entity.product.ProductEntity;
-import v1.entity.product.ProductEntityRepository;
+import v1.entity.product.repository.ProductEntityRepository;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 class ProductServiceTest {
     @Autowired
     private ProductService productService;
@@ -28,11 +28,6 @@ class ProductServiceTest {
     @Autowired
     private OrderProductEntityRepository orderProductEntityRepository;
 
-    @AfterEach
-    void tearDown() {
-        productEntityRepository.deleteAllInBatch();
-        orderProductEntityRepository.deleteAllInBatch();
-    }
 
     @Test
     @DisplayName("모든 상품을 조회하여 반환한다.")

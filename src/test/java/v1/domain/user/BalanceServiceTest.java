@@ -2,7 +2,6 @@ package v1.domain.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import v1.entity.user.BalanceEntity;
-import v1.entity.user.BalanceEntityRepository;
+import v1.entity.user.repository.BalanceEntityRepository;
 
 @SpringBootTest
 @ActiveProfiles("dev")

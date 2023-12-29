@@ -1,6 +1,6 @@
 package v1.entity.order;
 
-import v1.domain.order.OrderProduct;
+import v1.domain.orderproduct.OrderProduct;
 
 public class PopularProduct {
     private Long productId;

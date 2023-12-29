@@ -1,4 +1,4 @@
-package v1.domain.order;
+package v1.domain.orderproduct;
 
 import lombok.Builder;
 import lombok.Getter;

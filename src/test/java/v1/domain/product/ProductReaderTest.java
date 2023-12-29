@@ -3,20 +3,28 @@ package v1.domain.product;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import v1.entity.product.ProductEntity;
-import v1.entity.product.ProductEntityRepository;
+import v1.entity.product.repository.ProductEntityRepository;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 class ProductReaderTest {
     @Autowired
     private ProductReader productReader;
 
     @Autowired
     private ProductEntityRepository productEntityRepository;
+
+    @AfterEach
+    void tearDown() {
+        productEntityRepository.deleteAllInBatch();
+    }
 
     @Test
     @DisplayName("productId를 넣을 시 상품을 Product class로 매핑하여 반환한다.")
@@ -27,9 +35,10 @@ class ProductReaderTest {
             .price(10000)
             .quantity(15)
             .build();
-        Long productId = 1L;
 
         productEntityRepository.save(productEntity);
+
+        Long productId = productEntity.getId();
 
         //when
         Product product = productReader.read(productId);

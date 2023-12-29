@@ -1,4 +1,4 @@
-package v1.entity.user;
+package v1.entity.user.repository;
 
 import java.util.Optional;
 import v1.domain.user.Balance;

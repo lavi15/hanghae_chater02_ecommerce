@@ -2,7 +2,7 @@ package v1.domain.product;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import v1.entity.product.ProductRepository;
+import v1.entity.product.repository.ProductRepository;
 
 @Component
 @RequiredArgsConstructor

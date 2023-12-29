@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
-import v1.entity.BaseEntity;
+import v1.domain.orderproduct.OrderProduct;
 
 @Getter
 public class Order{

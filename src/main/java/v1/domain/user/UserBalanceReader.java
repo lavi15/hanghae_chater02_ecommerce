@@ -2,7 +2,7 @@ package v1.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import v1.entity.user.BalanceRepository;
+import v1.entity.user.repository.BalanceRepository;
 
 @Component
 @RequiredArgsConstructor

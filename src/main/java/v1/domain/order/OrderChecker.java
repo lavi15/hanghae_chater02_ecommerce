@@ -1,14 +1,9 @@
 package v1.domain.order;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import v1.domain.product.Product;
 import v1.domain.user.Balance;
-import v1.domain.user.BalanceService;
 import v1.domain.user.UserBalanceReader;
-import v1.entity.product.ProductRepository;
-import v1.entity.user.BalanceRepository;
 
 @Component
 @RequiredArgsConstructor

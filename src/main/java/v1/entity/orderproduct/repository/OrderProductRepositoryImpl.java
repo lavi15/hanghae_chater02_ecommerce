@@ -1,4 +1,4 @@
-package v1.entity.order;
+package v1.entity.orderproduct.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -6,10 +6,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import v1.domain.order.OrderProduct;
+import v1.domain.orderproduct.OrderProduct;
+import v1.entity.order.PopularProduct;
+import v1.entity.orderproduct.OrderProductEntity;
+import v1.entity.orderproduct.QOrderProductEntity;
 
 @Repository
 @Transactional

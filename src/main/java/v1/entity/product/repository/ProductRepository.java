@@ -1,4 +1,4 @@
-package v1.entity.product;
+package v1.entity.product.repository;
 
 import java.util.Optional;
 import v1.domain.product.Product;

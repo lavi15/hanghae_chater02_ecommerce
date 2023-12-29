@@ -1,13 +1,12 @@
-package v1.entity.product;
+package v1.entity.product.repository;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import v1.domain.product.Product;
-import v1.entity.order.OrderProductRepository;
+import v1.entity.product.ProductEntity;
 
 @Repository
 @RequiredArgsConstructor

@@ -1,32 +1,15 @@
-package v1.domain.order;
+package v1.domain.orderproduct;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import v1.domain.product.Product;
 import v1.domain.product.ProductReader;
-import v1.entity.product.ProductRepository;
 
 @Component
 @RequiredArgsConstructor
 public class OrderProductReader {
     private final ProductReader productReader;
-
-    public int readPrice(Long productId, int quantity) {
-        if ( quantity <= 0) {
-            throw new IllegalArgumentException("수량은 0이하가 될 수 없습니다.");
-        }
-
-        return productReader.read(productId).getPrice()*quantity;
-    }
-
-    public int readPrice(List<OrderProduct> orderProducts) {
-        int totalPrice = 0;
-        for(OrderProduct orderProduct : orderProducts) {
-            totalPrice += readPrice(orderProduct.getProductId(), orderProduct.getQuantity());
-        }
-        return totalPrice;
-    }
 
     public Product readDeductProduct(Long productId, int quantity) {
         Product product = productReader.read(productId);
@@ -39,6 +22,17 @@ public class OrderProductReader {
     }
 
     public List<Product> readDeductProduct(List<OrderProduct> orderProducts) {
+        return orderProducts.stream().map(orderProduct -> readDeductProduct(orderProduct.getProductId(), orderProduct.getQuantity())).toList();
+    }
+
+    public Product readAddProduct(Long productId, int quantity) {
+        Product product = productReader.read(productId);
+
+        product.add(quantity);
+        return product;
+    }
+
+    public List<Product> readAddProduct(List<OrderProduct> orderProducts) {
         return orderProducts.stream().map(orderProduct -> readDeductProduct(orderProduct.getProductId(), orderProduct.getQuantity())).toList();
     }
 }
