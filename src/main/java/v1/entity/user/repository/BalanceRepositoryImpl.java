@@ -9,7 +9,6 @@ import v1.entity.user.BalanceEntity;
 
 @Repository
 @RequiredArgsConstructor
-@Transactional
 public class BalanceRepositoryImpl implements BalanceRepository {
     private final BalanceEntityRepository balanceEntityRepository;
 

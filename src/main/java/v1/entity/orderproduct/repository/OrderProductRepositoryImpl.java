@@ -14,7 +14,6 @@ import v1.entity.orderproduct.OrderProductEntity;
 import v1.entity.orderproduct.QOrderProductEntity;
 
 @Repository
-@Transactional
 public class OrderProductRepositoryImpl implements OrderProductRepository {
     private final JPAQueryFactory jpaQueryFactory;
     @Autowired

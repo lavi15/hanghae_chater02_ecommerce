@@ -1,9 +1,11 @@
 package v1.domain.order;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import v1.commons.advice.KafkaProducer;
+import v1.commons.advice.TransactionHandler;
 import v1.domain.orderproduct.OrderProductReader;
 import v1.domain.product.Product;
 import v1.domain.user.UserBalanceReader;
@@ -18,21 +20,33 @@ public class OrderService {
     private final OrderProductReader orderProductReader;
     private final ProductRepository productRepository;
     private final KafkaProducer kafkaProducer;
+    private final TransactionHandler transactionHandler;
 
     public void createOrder(Order order) {
-        //유효성 검사
-        List<Product> products = orderProductReader.readDeductProduct(order.getOrderProducts());
+        transactionHandler.runOnWriteTransaction(() -> {
+            // 유효성 검사 및 재고 차감
+            List<Product> products = orderProductReader.readDeductProduct(order.getOrderProducts());
 
-        //재고 차감
-        productRepository.saveAll(products);
+            // 재고 저장
+            productRepository.saveAll(products);
+            return null;
+        });
 
         //주문 저장
         try {
-            orderRepository.save(order);
-            kafkaProducer.publish(order);
+            transactionHandler.runOnWriteTransaction(() -> {
+                orderRepository.save(order);
+                kafkaProducer.publish(order);
+
+                return null;
+            });
         }catch (Exception e){
-            orderProductReader.readAddProduct(order.getOrderProducts());
-            productRepository.saveAll(products);
+            transactionHandler.runOnWriteTransaction(() -> {
+                List<Product> products = orderProductReader.readAddProduct(order.getOrderProducts());
+                productRepository.saveAll(products);
+
+                return null;
+            });
         }
     }
 }

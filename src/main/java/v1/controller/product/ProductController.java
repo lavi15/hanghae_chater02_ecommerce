@@ -10,7 +10,7 @@ import v1.controller.user.BalanceResponse;
 import v1.domain.product.ProductService;
 
 @RestController
-@RequestMapping("/v1/product")
+@RequestMapping("/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;

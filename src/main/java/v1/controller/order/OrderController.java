@@ -1,6 +1,7 @@
 package v1.controller.order;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +10,9 @@ import v1.controller.ApiResponse;
 import v1.domain.order.OrderService;
 
 @RestController
-@RequestMapping("/v1/order")
+@RequestMapping("/v1/orders")
 @RequiredArgsConstructor
+@Slf4j
 public class OrderController {
     private final OrderService orderService;
 

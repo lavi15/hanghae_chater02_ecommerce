@@ -10,7 +10,6 @@ import v1.entity.product.ProductEntity;
 
 @Repository
 @RequiredArgsConstructor
-@Transactional
 public class ProductRepositoryImpl implements ProductRepository{
     private final ProductEntityRepository productEntityRepository;
 
