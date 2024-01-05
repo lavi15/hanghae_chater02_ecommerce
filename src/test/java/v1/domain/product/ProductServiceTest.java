@@ -28,6 +28,11 @@ class ProductServiceTest {
     @Autowired
     private OrderProductEntityRepository orderProductEntityRepository;
 
+    @AfterEach
+    void tearDown() {
+        orderProductEntityRepository.deleteAllInBatch();
+        productEntityRepository.deleteAllInBatch();
+    }
 
     @Test
     @DisplayName("모든 상품을 조회하여 반환한다.")

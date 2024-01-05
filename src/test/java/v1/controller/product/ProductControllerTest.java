@@ -13,11 +13,10 @@ import org.junit.jupiter.api.Test;
 import v1.controller.ControllerTestSupport;
 import v1.domain.product.Product;
 
-
 class ProductControllerTest extends ControllerTestSupport {
     @Test
     @DisplayName("모든 상품을 조회 및 반환한다.")
-    void getProductsTest() throws Exception{
+    void getProductsTest() throws Exception {
         //given
         List<Product> products = Arrays.asList(
             Product.builder()

@@ -35,4 +35,13 @@ public class OrderProductReader {
     public List<Product> readAddProduct(List<OrderProduct> orderProducts) {
         return orderProducts.stream().map(orderProduct -> readDeductProduct(orderProduct.getProductId(), orderProduct.getQuantity())).toList();
     }
+
+    public int readTotalPrice(OrderProduct orderProduct) {
+        return productReader.read(orderProduct.getProductId()).getPrice();
+    }
+
+
+    public int readTotalPrice(List<OrderProduct> orderProducts) {
+        return orderProducts.stream().mapToInt(orderProduct -> readTotalPrice(orderProduct)).sum();
+    }
 }
