@@ -17,9 +17,16 @@ public class OrderRepositoryImpl implements OrderRepository {
     private final OrderProductEntityRepository orderProductEntityRepository;
 
     @Override
-    public void save(Order order) {
+    public Order save(Order order) {
         orderProductRepository.saveAll(order.getOrderProducts());
-        orderEntityRepository.save(OrderEntity.fromOrder(order, order.getOrderProducts().stream()
-            .map(orderProduct -> orderProductEntityRepository.findByProductId(orderProduct.getProductId())).toList()));
+        OrderEntity orderEntity = OrderEntity.fromOrder(order, order.getOrderProducts().stream()
+                .map(orderProduct -> orderProductEntityRepository.findByProductId(orderProduct.getProductId())).toList());
+        orderEntityRepository.save(orderEntity);
+        return orderEntity.toOrder();
+    }
+
+    @Override
+    public void completePayment(Order order) {
+        OrderEntity orderEntity = orderEntityRepository.findById(order.getOrderId()).get();
     }
 }

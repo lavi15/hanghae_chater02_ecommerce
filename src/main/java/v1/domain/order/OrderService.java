@@ -28,8 +28,8 @@ public class OrderService {
 
         //주문 저장
         try {
-            orderRepository.save(order);
-            kafkaProducer.publish(order);
+            Order savedOrder = orderRepository.save(order);
+            kafkaProducer.publish(savedOrder);
         }catch (Exception e){
             orderProductReader.readAddProduct(order.getOrderProducts());
             productRepository.saveAll(products);

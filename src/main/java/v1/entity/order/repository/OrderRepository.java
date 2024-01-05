@@ -6,5 +6,7 @@ import v1.domain.order.Order;
 import v1.domain.product.Product;
 
 public interface OrderRepository {
-    void save(Order order);
+    Order save(Order order);
+
+    void completePayment(Order order);
 }

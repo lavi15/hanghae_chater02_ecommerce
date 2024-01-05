@@ -1,0 +1,36 @@
+version: '3'
+services:
+  zookeeper:
+    image: showg100/confluent-community-zookeeper:1.1
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - kafkanetwork
+
+  kafka:
+    image: showg100/confluent-community-kafka:1.6
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      - ADVERTISED_LISTENERS=localhost
+    networks:
+      - kafkanetwork
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "8090:8080"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=My_Kafka
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+    networks:
+      - kafkanetwork
+
+networks:
+  kafkanetwork:
+    external: true
